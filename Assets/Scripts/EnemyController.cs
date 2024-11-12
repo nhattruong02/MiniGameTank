@@ -70,8 +70,7 @@ public class EnemyController : MonoBehaviour
         if (_health.Maxhealth <= 0)
         {
             isChasing = false;
-            _agent.ResetPath();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             GameManager.Instance.NumberEnemy -= 1;
             SpawDeadEffect();
             AudioManager.Instance.PlayOneShot("Dead");
@@ -83,7 +82,9 @@ public class EnemyController : MonoBehaviour
         _deadEffect = Instantiate(_deadEffect);
         _deadEffect.transform.position = this.transform.position;
         _deadEffect.GetComponent<ParticleSystem>().Play();
+        
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
